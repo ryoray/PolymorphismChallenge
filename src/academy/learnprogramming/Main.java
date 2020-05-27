@@ -1,202 +1,75 @@
 package academy.learnprogramming;
 
 class Car {
-    private String name;
     private boolean engine;
-    private int cylinder;
+    private int cylinders;
+    private String name;
     private int wheels;
-    private int velocity;
 
-    public Car(String name, int cylinder) {
+    public Car(int cylinders, String name) {
+        this.cylinders = cylinders;
         this.name = name;
-        this.cylinder = cylinder;
-        this.engine = true;
         this.wheels = 4;
-        this.velocity = 0;
+        this.engine = true;
     }
 
-    public void startEngine() {
-        System.out.println("Engine has been started");
-    }
-
-    public int accelerate(int speed) {
-        int velocity = this.getVelocity();
-        if (speed < 0) {
-            System.out.println("The car is moving constantly at " + velocity);
-        } else {
-            this.velocity += speed;
-            System.out.println("The car's velocity was added by " +
-                    speed + " and now become " + this.velocity);
-        }
-        return velocity;
-    }
-
-    public int brake (int speed) {
-        int velocity = this.getVelocity();
-        if (speed < 0) {
-            System.out.println("The car speed is moving constantly at " + velocity);
-        } else {
-            this.velocity -= speed;
-            System.out.println("The car's velocity was reduced by " +
-                    speed + " and now become " + velocity);
-        }
-        return velocity;
+    public int getCylinders() {
+        return cylinders;
     }
 
     public String getName() {
         return name;
     }
 
-    public boolean isEngine() {
-        return engine;
+    public String startEngine() {
+        return "Car -> startEngine()";
     }
 
-    public int getCylinder() {
-        return cylinder;
+    public String accelerate() {
+        return "Car -> accelerate()";
     }
 
-    public int getWheels() {
-        return wheels;
-    }
-
-    public int getVelocity() {
-        return velocity;
-    }
-
-    public void setVelocity(int velocity) {
-        this.velocity = velocity;
+    public String brake() {
+        return "Car -> brake()";
     }
 }
 
-class Fortuner extends Car{
-    public Fortuner() {
-        super("Fortuner", 6);
+class Mitsubishi extends Car {
+    public Mitsubishi(int cylinders, String name) {
+        super(cylinders, name);
     }
 
-    public int accelerate(int speed) {
-        int velocity = this.getVelocity();
-        if (speed < 0) {
-            System.out.println("The car " + getName() + " is moving constantly at " + velocity);
-        } else {
-            if (speed < 5) {
-                velocity += 5;
-            } else {
-                velocity += (speed - 5);
-            }
-            System.out.println("The car " + getName() + " velocity was added by " +
-                    speed + " and now become " + velocity);
-        }
-        return velocity;
+    @Override
+    public String startEngine() {
+        return "Mitsubishi -> startEngine()";
     }
 
-    public int brake(int speed) {
-        int velocity = this.getVelocity();
-        if (speed < 0) {
-            System.out.println("The car " + getName() + " is moving constantly at " + velocity);
-        } else {
-            if (speed < 5) {
-                velocity -= speed;
-            } else {
-                velocity -= (speed - 5);
-            }
-            System.out.println("The car " + getName() + " velocity was reduced by " +
-                    speed + " and now become " + velocity);
-        }
-        return velocity;
-    }
-}
-
-class Ertiga extends Car {
-    public Ertiga() {
-        super("Ertiga", 3);
+    @Override
+    public String accelerate() {
+        return "Mitsubishi -> accelerate()";
     }
 
-    public int accelerate(int speed) {
-        int velocity = this.getVelocity();
-        if (speed < 0) {
-            System.out.println("The car " + getName() + " is moving constantly at " + velocity);
-        } else {
-            velocity += speed;
-            System.out.println("The car " + getName() + " velocity was added by " +
-                    speed + " and now become " + velocity);
-        }
-        return velocity;
-    }
-
-    public int brake(int speed) {
-        int velocity = this.getVelocity();
-        if (speed < 0) {
-            System.out.println("The car " + getName() + " is moving constantly at " + velocity);
-        } else {
-            velocity -= speed;
-            System.out.println("The car " + getName() + " velocity was reduced by " +
-                    speed + " and now become " + velocity);
-        }
-        return velocity;
-    }
-}
-
-class LandCruise extends Car {
-    public LandCruise() {
-        super("Land Cruiser", 8);
-    }
-
-    public int accelerate(int speed) {
-        int velocity = this.getVelocity();
-        if (speed < 0) {
-            System.out.println("The car " + getName() + " is moving constantly at " + velocity);
-        } else {
-            if (speed < 10) {
-                velocity += speed;
-            } else {
-                velocity += (speed - 10);
-            }
-            System.out.println("The car " + getName() + " velocity was added by " +
-                    speed + " and now become " + velocity);
-        }
-        return velocity;
-    }
-
-    public int brake(int speed) {
-        int velocity = this.getVelocity();
-        if (speed < 0) {
-            System.out.println("The car " + getName() + " is moving constantly at " + velocity);
-        } else {
-            if (speed < 10) {
-                velocity -= speed;
-            } else {
-                velocity -= (speed - 10);
-            }
-            System.out.println("The car " + getName() + " velocity was reduced by " +
-                    speed + " and now become " + velocity);
-        }
-        return velocity;
+    @Override
+    public String brake() {
+        return "Mitsubishi -> brake()";
     }
 }
 
 public class Main {
-
     public static void main(String[] args) {
-        for (int i=1; i<5; i++) {
-            Car car = randomCar();
-            System.out.println("Car #" + i +
-                    " : " + car.getName() + "\n" +
-                    car.accelerate(20) + "\n" +
-                    car.brake(15));
-        }
-    }
+        Car car = new Car(8,"Default Car");
+        System.out.println(car.startEngine());
+        System.out.println(car.accelerate());
+        System.out.println(car.brake());
 
-    public static Car randomCar() {
-        int randomNumber =(int) (Math.random() * 3) + 1;
-        System.out.println("Car selection = ");
-        switch (randomNumber) {
-            case 1:
-                return new Fortuner();
-            case 2:
-                return new Ertiga();
-            case 3:
-                return new LandCruise();
-        }
-        return null;
+        Mitsubishi mitsubishi = new Mitsubishi(6, "Outlander");
+        System.out.println(mitsubishi.startEngine());
+        System.out.println(mitsubishi.accelerate());
+        System.out.println(mitsubishi.brake());
+
+        Ford ford = new Ford(6, "Ford Falcon");
+        System.out.println(ford.startEngine());
+        System.out.println(ford.accelerate());
+        System.out.println(ford.brake());
     }
 }
