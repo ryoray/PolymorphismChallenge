@@ -55,6 +55,48 @@ class Mitsubishi extends Car {
     }
 }
 
+class Holden extends Car {
+    public Holden(int cylinders, String name) {
+        super(cylinders, name);
+    }
+
+    @Override
+    public String startEngine() {
+        return getClass().getSimpleName() + " -> startEngine()";
+    }
+
+    @Override
+    public String accelerate() {
+        return getClass().getSimpleName() + " -> Holden -> accelerate()";
+    }
+
+    @Override
+    public String brake() {
+        return getClass().getSimpleName() + " -> Holden -> brake()";
+    }
+}
+
+class Ford extends Car {
+    public Ford(int cylinders, String name) {
+        super(cylinders, name);
+    }
+
+    @Override
+    public String startEngine() {
+        return "Ford -> startEngine()";
+    }
+
+    @Override
+    public String accelerate() {
+        return "Ford -> accelerate()";
+    }
+
+    @Override
+    public String brake() {
+        return "Ford -> brake()";
+    }
+}
+
 public class Main {
     public static void main(String[] args) {
         Car car = new Car(8,"Default Car");
@@ -71,5 +113,10 @@ public class Main {
         System.out.println(ford.startEngine());
         System.out.println(ford.accelerate());
         System.out.println(ford.brake());
+
+        Holden holden = new Holden(6, "Holden Commodore");
+        System.out.println(holden.startEngine());
+        System.out.println(holden.accelerate());
+        System.out.println(holden.brake());
     }
 }
